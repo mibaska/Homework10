@@ -60,7 +60,42 @@ function getInOrder(){
           });
         });
       }else if(response.listAleph === "View All Employees By Manager"){
-        
+        var manArray = [];
+        connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id", function(err, res){
+          if(err) throw err;
+          console.log(res);
+          res.array.forEach(man => {
+            var manData = {
+              firstName: man.first_name,
+              lastName: man.last_name,
+              role: man.title
+            };
+            if(manData.role === "Manager"){
+              manArray.push(manData);
+            }
+          });
+          inquirer
+          .prompt({
+            type: "list",
+            name: "listGimel",
+            message: "Which manager would you like to see?",
+            choices: depArray
+          })
+          .then(function(response) {
+            var empManArray = [];
+            connection.query("SELECT * FROM employee e LEFT JOIN employee m ON e.manager_id = m.id", function(err, res){
+              if(err) throw err;
+              console.log(res);
+              res.array.forEach(empMan => {
+                var empManData = {
+                  name: empMan.name
+                };
+                empManArray.push(empManData);
+              });
+              console.table(empManArray);
+            });
+          });
+        });
       }else if(response.listAleph === "Add Employee"){
         
       }else if(response.listAleph === "Remove Employee"){
@@ -70,13 +105,32 @@ function getInOrder(){
       }else if(response.listAleph === "Update Employee Manager"){
         
       }else if(response.listAleph === "View All Roles"){
-        
+        connection.query("SELECT * FROM role", function(err, res){
+          if(err) throw err;
+          console.log(res);
+          res.array.forEach(rol => {
+            console.table({
+              id: rol.id,
+              title: rol.title,
+              salary: rol.salary
+            });
+          });
+        });
       }else if(response.listAleph === "Add Role"){
         
       }else if(response.listAleph === "Remove Role"){
         
       }else if(response.listAleph === "View All Departments"){
-        
+        connection.query("SELECT * FROM department", function(err, res){
+          if(err) throw err;
+          console.log(res);
+          res.array.forEach(dep => {
+            console.table({
+              id: dep.id,
+              name: dep.name
+            });
+          });
+        });
       }else if(response.listAleph === "Add Department"){
         
       }else if(response.listAleph === "Remove Department"){
