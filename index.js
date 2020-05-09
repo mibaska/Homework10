@@ -16,7 +16,7 @@ function getInOrder(){
         connection.query("SELECT * FROM employee", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(emp => {
+          res.forEach(emp => {
             var empData = {
               id: emp.id,
               lastName: emp.last_name,
@@ -31,7 +31,7 @@ function getInOrder(){
         connection.query("SELECT * FROM department", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(dep => {
+          res.forEach(dep => {
             var depData = {
               name: dep.name
             };
@@ -49,7 +49,7 @@ function getInOrder(){
             connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d ON r.department_id = d.id WHERE d.name = ?", function(err, res){
               if(err) throw err;
               console.log(res);
-              res.array.forEach(empDep => {
+              res.forEach(empDep => {
                 var empDepData = {
                   name: empDep.name
                 };
@@ -64,7 +64,7 @@ function getInOrder(){
         connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(man => {
+          res.forEach(man => {
             var manData = {
               firstName: man.first_name,
               lastName: man.last_name,
@@ -86,7 +86,7 @@ function getInOrder(){
             connection.query("SELECT * FROM employee e LEFT JOIN employee m ON e.manager_id = m.id", function(err, res){
               if(err) throw err;
               console.log(res);
-              res.array.forEach(empMan => {
+              res.forEach(empMan => {
                 var empManData = {
                   name: empMan.name
                 };
@@ -131,7 +131,7 @@ function getInOrder(){
         connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(emp => {
+          res.forEach(emp => {
             var empData = {
               id: emp.id,
               firstName: emp.first_name,
@@ -168,7 +168,7 @@ function getInOrder(){
         connection.query("SELECT * FROM role", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(rol => {
+          res.forEach(rol => {
             console.table({
               id: rol.id,
               title: rol.title,
@@ -201,7 +201,7 @@ function getInOrder(){
         connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(rol => {
+          res.forEach(rol => {
             console.table({
               id: rol.id,
               title: rol.title,
@@ -233,7 +233,7 @@ function getInOrder(){
         connection.query("SELECT * FROM department", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(dep => {
+          res.forEach(dep => {
             console.table({
               id: dep.id,
               name: dep.name
@@ -260,7 +260,7 @@ function getInOrder(){
         connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id", function(err, res){
           if(err) throw err;
           console.log(res);
-          res.array.forEach(dep => {
+          res.forEach(dep => {
             console.table({
               id: dep.id,
               name: dep.name
