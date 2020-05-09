@@ -304,17 +304,17 @@ connection.connect(function(err){
     }
 });
 
-connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d ON r.department_id = d.id", function(err, res){
-  if(err) throw err;
-  console.log(res);
-  res.array.forEach(emp => {
-    console.table({
-      id: emp.id,
-      lastName: emp.last_name,
-      firstName: emp.first_name,
-      role: emp.title,
-      department: emp.name
-    });
-  });
-  getInOrder();
-});
+// connection.query("SELECT * FROM employee e LEFT JOIN role r ON e.role_id = r.id LEFT JOIN department d ON r.department_id = d.id", function(err, res){
+//   if(err) throw err;
+//   console.log(res);
+//   res.array.forEach(emp => { // Error is here
+//     console.table({
+//       id: emp.id,
+//       lastName: emp.last_name,
+//       firstName: emp.first_name,
+//       role: emp.title,
+//       department: emp.name
+//     });
+//   });
+//   getInOrder();
+// });
